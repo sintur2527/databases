@@ -42,6 +42,7 @@ module.exports = {
           res.send(err);
         }
         newUser.objectId = userId;
+        console.log('success');
         res.status(201).send(newUser);
       });
     },

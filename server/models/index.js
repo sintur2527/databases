@@ -15,7 +15,7 @@ module.exports = {
     }, // a function which produces all the messages
     post: function({ message, username, roomname }, result) {
       db.query(
-        'INSERT INTO messages (message, username, roomname) VALUES (?, ?, ?)',
+        'INSERT INTO messages (message, username, roomname) VALUES (?, (SELECT id FROM users WHERE username = ?), ?)',
         [message, username, roomname],
         (err, res) => {
           if (err) {
@@ -43,7 +43,7 @@ module.exports = {
     },
     post: function({ username }, result) {
       db.query(
-        'INSERT INTO users (username) VALUES ?',
+        'INSERT INTO users (username) VALUES (?)',
         [username],
         (err, res) => {
           if (err) {

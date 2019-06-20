@@ -22,16 +22,16 @@ ALTER TABLE messages ADD FOREIGN KEY (username) REFERENCES users(id);
 /* ALTER TABLE messages ADD FOREIGN KEY (roomID) REFERENCES rooms(id);
 ALTER TABLE friends ADD FOREIGN KEY (userId) REFERENCES users(id);
 ALTER TABLE friends ADD FOREIGN KEY (friendID) REFERENCES users(id); */
-
-INSERT INTO messages (message, roomname) VALUES 
-('how are you?', 'lobby'),
-('whats up', 'lobby'),
-('call me', 'lobby');
-
 INSERT INTO users (username) VALUES 
 ('kawhi'),
 ('steph'),
 ('anthony');
+
+INSERT INTO messages (message, username, roomname) VALUES 
+('how are you?',(SELECT id from users where username = 'kawhi') ,'lobby'),
+('whats up', (SELECT id from users where username = 'steph'),'lobby'),
+('call me', (SELECT id from users where username = 'anthony'),'lobby');
+
 
 
 /*  Execute this file from the command line by typing:
